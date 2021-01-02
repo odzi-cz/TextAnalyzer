@@ -48,7 +48,7 @@ def print_text_stats(text_no):
     capitals = list(filter(str.istitle, TEXTS[text_no - 1].split()))
 
     # - počet slov psaných velkými písmeny,
-    uppercase = list(filter(None, [word.isupper() for word in capitals]))
+    uppercase = list(filter(None, [word.isupper() for word in lst_words]))
 
     # - počet slov psaných malými písmeny,
     lowercase = list(filter(None, [word.islower() for word in lst_words]))
