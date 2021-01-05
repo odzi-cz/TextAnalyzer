@@ -1,3 +1,4 @@
+import re
 from users import authenticate_user
 from texts import TEXTS
 
@@ -41,8 +42,17 @@ def analyze_text():
 
 
 def print_text_stats(text_no):
-    # - počet slov,
-    lst_words = TEXTS[text_no - 1].split()
+    # - vycisteni vybraneho textu interpukcnich znamenek
+    selected_text = re.sub("[^A-Za-z0-9]", " ", TEXTS[text_no - 1])
+
+    # - reseni bez pouziti regex (funkcni jen pro znaky v rm_char)
+    # selected_text = TEXTS[text_no - 1]
+    # rm_char = [",", ".", "!", "?", "(", ")"]
+    # for i in rm_char:
+    #     selected_text = selected_text.replace(i, " ")
+
+    #prevedeni textu na list
+    lst_words = selected_text.split()
 
     # - počet slov začínajících velkým písmenem,
     capitals = list(filter(str.istitle, TEXTS[text_no - 1].split()))
@@ -78,6 +88,7 @@ def print_text_stats(text_no):
     # naplneni listu delkami slov
     for i in lst_words:
         lst_len.append(len(i))
+        #print(i, len(i)) kontrola poctu
 
     # prevedeni na set k odstraneni duplicit
     set_len = set(lst_len)
